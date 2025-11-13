@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace S2Hub_App.Models
 {
-    internal class FileItem
+    public class FileItem
     {
+        public string Name { get; init; } = "";
+        public long SizeKB { get; init; }
+        public DateTime Modified { get; init; }
     }
 }
