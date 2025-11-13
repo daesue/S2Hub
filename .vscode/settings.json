@@ -1,0 +1,17 @@
+{
+    "files.exclude": {
+        "**/.vs": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "search.exclude": {
+        "**/.vs": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "git.ignoredRepositories": [
+        ".vs",
+        "bin",
+        "obj"
+    ]
+}
