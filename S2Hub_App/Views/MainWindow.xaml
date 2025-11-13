@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:models="clr-namespace:S2Hub_App.Models"
+        xmlns:ViewModels="clr-namespace:S2Hub_App.ViewModels"
         mc:Ignorable="d"
         Title="S2Hub" Height="600" Width="1024">
+    
+    <Window.DataContext>
+        <ViewModels:MainViewModel />
+    </Window.DataContext>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
