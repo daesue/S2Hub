@@ -36,5 +36,14 @@ namespace S2Hub_App.Views
             if (DataContext is MainViewModel vm)
                 vm.SelectedNode = e.NewValue as DirectoryNode;
         }
+
+        private void MenuInfo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "Smart Stow Hub\n\nVersion: 1.0.0\nDeveloper: Daesue\n\n© 2025 All Rights Reserved.",
+                "S2Hub Information",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
     }
 }

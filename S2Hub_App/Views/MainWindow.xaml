@@ -6,47 +6,61 @@
         xmlns:models="clr-namespace:S2Hub_App.Models"
         xmlns:ViewModels="clr-namespace:S2Hub_App.ViewModels"
         mc:Ignorable="d"
-        Title="S2Hub" Height="600" Width="1024">
-    
+        Title="Smart Stow Hub" Height="600" Width="1024">
+
     <Window.DataContext>
         <ViewModels:MainViewModel />
     </Window.DataContext>
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <!-- TreeView -->
-        <TreeView x:Name="DirectoryTree"
-                  ItemsSource="{Binding Drives}"
-                  Grid.Column="0"
-                  SelectedItemChanged="DirectoryTree_SelectedItemChanged">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type models:DirectoryNode}" ItemsSource="{Binding Children}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="📁" Margin="0,0,6,0"/>
-                        <TextBlock Text="{Binding Name}"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="TreeViewItem">
-                    <EventSetter Event="Expanded" Handler="OnTreeItemExpanded"/>
-                </Style>
-            </TreeView.ItemContainerStyle>
-        </TreeView>
 
-        <!-- ListView -->
-        <ListView Grid.Column="1" ItemsSource="{Binding Files}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="400"/>
-                    <GridViewColumn Header="Size (KB)" DisplayMemberBinding="{Binding SizeKB}" Width="100"/>
-                    <GridViewColumn Header="Modified" DisplayMemberBinding="{Binding Modified}" Width="180"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <DockPanel>
+
+        <!-- 메뉴 영역 -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="도움말(_H)">
+                <MenuItem Header="S2Hub Info...(_A)" Click="MenuInfo_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="21"/>
+                <ColumnDefinition Width="14"/>
+                <ColumnDefinition Width="285"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- TreeView -->
+            <TreeView x:Name="DirectoryTree"
+                    ItemsSource="{Binding Drives}"
+                    Grid.Column="0"
+                    SelectedItemChanged="DirectoryTree_SelectedItemChanged" Grid.ColumnSpan="3">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type models:DirectoryNode}" ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📁" Margin="0,0,6,0"/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem">
+                        <EventSetter Event="Expanded" Handler="OnTreeItemExpanded"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+            </TreeView>
+
+            <!-- ListView -->
+            <ListView Grid.Column="3" ItemsSource="{Binding Files}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="400"/>
+                        <GridViewColumn Header="Size (KB)" DisplayMemberBinding="{Binding SizeKB}" Width="100"/>
+                        <GridViewColumn Header="Modified" DisplayMemberBinding="{Binding Modified}" Width="180"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
 </Window>
