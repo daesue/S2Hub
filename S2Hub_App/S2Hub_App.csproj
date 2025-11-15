@@ -1,20 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-    <ApplicationIcon>Assets\Icons\S2Hub.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Assets\Icons\S2Hub.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\S2Hub.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Assets\Icons\S2Hub.ico</ApplicationIcon>
+
+		<!-- 앱 기본 버전 (수동으로 관리) -->
+		<Version>0.1.2</Version>
+	</PropertyGroup>
+
+	<!-- 🔥 BuildNumber 자동 증가: PowerShell로 처리 (MSBuild 함수 X) -->
+	<Target Name="UpdateBuildNumber" BeforeTargets="BeforeBuild">
+		<Exec Command="&quot;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -Command ^
+      $p = '$(ProjectDir)BuildNumber.txt'; ^
+      if (Test-Path $p) { ^
+        $n = (Get-Content $p)[0]; ^
+        if (-not [int]::TryParse($n, [ref]([int]0))) { $n = 0 }; ^
+        $n = [int]$n + 1 ^
+      } else { ^
+        $n = 1 ^
+      }; ^
+      Set-Content -Path $p -Value $n" />
+	</Target>
+
+
+	<ItemGroup>
+		<None Remove="Assets\Icons\S2Hub.ico" />
+		<None Remove="Assets\Images\bethetop.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Assets\Icons\S2Hub.ico" />
+		<Resource Include="Assets\Images\bethetop.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="BuildNumber.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
 </Project>
-
-

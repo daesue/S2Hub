@@ -39,11 +39,14 @@ namespace S2Hub_App.Views
 
         private void MenuInfo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(
-                "Smart Stow Hub\n\nVersion: 1.0.0\nDeveloper: Daesue\n\n© 2025 All Rights Reserved.",
-                "S2Hub Information",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            //MessageBox.Show(
+            //    "Smart Stow Hub\n\nVersion: 1.0.0\nDeveloper: Daesue\n\n© 2025 All Rights Reserved.",
+            //    "S2Hub Information",
+            //    MessageBoxButton.OK,
+            //    MessageBoxImage.Information);
+            var dlg = new InfoDialog();
+            dlg.Owner = this;   // 부모 창 중앙에 띄우기
+            dlg.ShowDialog();
         }
     }
 }
