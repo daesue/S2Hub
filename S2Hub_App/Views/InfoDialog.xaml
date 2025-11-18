@@ -9,7 +9,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Background="#FAFAFA">
+        Background="#FAFAFA" ShowInTaskbar="False" WindowStyle="ToolWindow">
 
 
     <Border BorderBrush="#DDD" BorderThickness="1" Padding="20" CornerRadius="10">
@@ -50,7 +50,7 @@
                        MouseDown="OnGithubClick" />
 
             <Button Content="확인" Width="80" Margin="0 10 0 0"
-                    Click="OnCloseClick"/>
+                    Click="OnCloseClick" IsDefault="True" />
         </StackPanel>
     </Border>
 

@@ -13,29 +13,28 @@
 		<FileVersion>0.1.2.8</FileVersion>
 	</PropertyGroup>
 
-	<!-- 🔥 BuildNumber 자동 증가: PowerShell로 처리 (MSBuild 함수 X) -->
+	<!-- BuildNumber 자동 증가: PowerShell로 처리 (MSBuild 함수 X) -->
 	<Target Name="UpdateBuildNumber" BeforeTargets="BeforeBuild">
-		<Exec Command="&quot;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -Command ^
-      $p = '$(ProjectDir)BuildNumber.txt'; ^
-      if (Test-Path $p) { ^
-        $n = (Get-Content $p)[0]; ^
-        if (-not [int]::TryParse($n, [ref]([int]0))) { $n = 0 }; ^
-        $n = [int]$n + 1 ^
-      } else { ^
-        $n = 1 ^
-      }; ^
-      Set-Content -Path $p -Value $n" />
+		<Exec Command="&quot;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -Command ^&#xD;&#xA;      $p = '$(ProjectDir)BuildNumber.txt'; ^&#xD;&#xA;      if (Test-Path $p) { ^&#xD;&#xA;        $n = (Get-Content $p)[0]; ^&#xD;&#xA;        if (-not [int]::TryParse($n, [ref]([int]0))) { $n = 0 }; ^&#xD;&#xA;        $n = [int]$n + 1 ^&#xD;&#xA;      } else { ^&#xD;&#xA;        $n = 1 ^&#xD;&#xA;      }; ^&#xD;&#xA;      Set-Content -Path $p -Value $n" />
 	</Target>
 
 
 	<ItemGroup>
 		<None Remove="Assets\Icons\S2Hub.ico" />
 		<None Remove="Assets\Images\bethetop.png" />
+		<None Remove="Assets\Images\thinking_1.png" />
+		<None Remove="Assets\Images\thinking_wait.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Resource Include="Assets\Icons\S2Hub.ico" />
 		<Resource Include="Assets\Images\bethetop.png" />
+		<Resource Include="Assets\Images\thinking_1.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Images\thinking_wait.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>

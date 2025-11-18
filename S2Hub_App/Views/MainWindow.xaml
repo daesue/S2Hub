@@ -16,8 +16,28 @@
     <DockPanel>
         <!-- 메뉴 영역 -->
         <Menu DockPanel.Dock="Top">
+            <!-- 파일(F) -->
+            <MenuItem Header="_파일(F)">
+                <MenuItem Header="닫기(_C)"
+                  Click="OnFileCloseClick" />                                                                   
+            </MenuItem>
+
+            <!-- 보기(V) -->
+            <MenuItem Header="_보기(V)">
+                <MenuItem Header="UI 언어(_U)"
+                  Click="OnViewUiLanguageClick" />
+            </MenuItem>
+
+            <!-- 도움말(H) -->
             <MenuItem Header="도움말(_H)">
-                <MenuItem Header="S2Hub Info...(_A)" Click="MenuInfo_Click"/>
+                <MenuItem Header="도움말 항목(_H)"
+                  Click="OnHelpTopicsClick" />
+
+                <MenuItem Header="대화(_T)"
+                  Click="OnHelpChatClick" />
+
+                <Separator />
+                <MenuItem Header="S2Hub Info...(_A)" Click="OnS2HubInfoClick"/>
             </MenuItem>
         </Menu>
 

@@ -1,0 +1,44 @@
+﻿<Window x:Class="S2Hub_App.Views.ChatDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="S2Hub 대화"
+        Width="200" Height="320"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        WindowStartupLocation="CenterOwner"
+        MouseDown="Window_MouseDown">
+
+    <Grid Background="Transparent">
+
+        <Image x:Name="CharacterImage"
+               Source="/Assets/Images/thinking_wait.png"
+               Stretch="Uniform"
+               Margin="0,10,0,0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               SnapsToDevicePixels="True"
+               MouseEnter="Character_MouseEnter"
+               MouseLeave="Character_MouseLeave"
+               />
+
+        <!-- X 버튼 (벡터) -->
+        <Grid x:Name="CloseButton"
+              Width="22" Height="22"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="-5,0,0,0"
+              Visibility="Collapsed"
+              Cursor="Hand"
+              MouseDown="CloseButton_MouseDown"
+              MouseEnter="CloseButton_MouseEnter"
+              MouseLeave="CloseButton_MouseLeave">
+
+            <Ellipse Fill="#AA444444" Stroke="White" StrokeThickness="1.2"/>
+            <Path Stroke="White" StrokeThickness="2"
+                  Data="M 6 6 L 16 16 M 6 16 L 16 6"/>
+        </Grid>
+
+    </Grid>
+</Window>
