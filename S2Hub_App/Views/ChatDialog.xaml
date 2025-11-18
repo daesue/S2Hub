@@ -2,43 +2,95 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="S2Hub 대화"
-        Width="200" Height="320"
+        Width="350" Height="296"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True"
-        WindowStartupLocation="CenterOwner"
         MouseDown="Window_MouseDown">
 
-    <Grid Background="Transparent">
+    <Grid x:Name="ChatDialogGrid" Background="Transparent">
 
-        <Image x:Name="CharacterImage"
-               Source="/Assets/Images/thinking_wait.png"
-               Stretch="Uniform"
-               Margin="0,10,0,0"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               SnapsToDevicePixels="True"
-               MouseEnter="Character_MouseEnter"
-               MouseLeave="Character_MouseLeave"
-               />
+        <!-- 2행 구조: 캐릭터 / 입력창 -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <!-- X 버튼 (벡터) -->
-        <Grid x:Name="CloseButton"
-              Width="22" Height="22"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Top"
-              Margin="-5,0,0,0"
-              Visibility="Collapsed"
-              Cursor="Hand"
-              MouseDown="CloseButton_MouseDown"
-              MouseEnter="CloseButton_MouseEnter"
-              MouseLeave="CloseButton_MouseLeave">
+        <!-- ① 상단 대화+캐릭터 영역 -->
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- 왼쪽 말풍선 공간 -->
+                <ColumnDefinition Width="140" />
+                <!-- 오른쪽 캐릭터 -->
+            </Grid.ColumnDefinitions>
 
-            <Ellipse Fill="#AA444444" Stroke="White" StrokeThickness="1.2"/>
-            <Path Stroke="White" StrokeThickness="2"
-                  Data="M 6 6 L 16 16 M 6 16 L 16 6"/>
+            <!-- 왼쪽 말풍선 공간(지금은 빈 레이아웃) -->
+            <Border x:Name="BalloonArea"
+                    Grid.Column="0"
+                    Background="Transparent"
+                    Margin="10"
+                    BorderThickness="0">
+            </Border>
+
+            <!-- 캐릭터 이미지 -->
+            <Grid Grid.Column="1" Background="Transparent">
+
+                <Image x:Name="CharacterImage"
+                       Source="/Assets/Images/thinking_wait.png"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Margin="0,40,0,0"
+                       MouseEnter="Character_MouseEnter"
+                       MouseLeave="Character_MouseLeave"
+                       />
+
+                <!-- X 버튼 확장 Hover 영역 -->
+                <Border x:Name="CloseHitBox"
+                        Width="120" Height="80"
+                        Background="Transparent"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="-5,-10,0,0"
+                        Visibility="Collapsed"
+                        MouseEnter="CloseHitBox_MouseEnter"
+                        MouseLeave="CloseHitBox_MouseLeave">
+
+                    <!-- X 버튼 (벡터) -->
+                    <Grid x:Name="CloseButton"
+                          Width="25" Height="25"
+                          Cursor="Hand"
+                          MouseDown="CloseButton_MouseDown">
+
+                        <Ellipse Fill="#AA444444" Stroke="White"     StrokeThickness="1.4"/>
+                        <Path Stroke="White" StrokeThickness="2.2"
+                              Data="M 7 7 L 19 19 M 7 19 L 19 7"/>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
+
+        <!-- ② 입력 박스 -->
+        <Border Grid.Row="1"
+                Height="38"
+                Margin="10,10,10,10"
+                CornerRadius="6"
+                BorderBrush="#555"
+                BorderThickness="1"
+                Background="White">
+
+            <TextBox x:Name="InputChatBox"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     VerticalContentAlignment="Center"
+                     FontSize="20"
+                     Foreground="Black"
+                     Padding="6,0,6,0"
+                     KeyDown="InputChatBox_KeyDown"
+                     />
+        </Border>
 
     </Grid>
 </Window>

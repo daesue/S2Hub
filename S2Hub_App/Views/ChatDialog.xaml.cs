@@ -35,36 +35,47 @@ namespace S2Hub_App.Views
         // 캐릭터에 마우스 올라오면 X 표시
         private void Character_MouseEnter(object sender, MouseEventArgs e)
         {
-            CloseButton.Visibility = Visibility.Visible;
+            CloseHitBox.Visibility = Visibility.Visible;
         }
-
-        // 캐릭터에서 벗어나도 → X 버튼으로 가는 경우는 숨기지 않음
+        // 캐릭터에서 벗어나도 → X 영역으로 들어가면 유지
         private void Character_MouseLeave(object sender, MouseEventArgs e)
         {
-            // 실제로 Grid_MouseLeave와 다르게,
-            // X 버튼에 올라가는지 확인
-            if (!CloseButton.IsMouseOver)
-            {
-                CloseButton.Visibility = Visibility.Collapsed;
-            }
+            if (!CloseHitBox.IsMouseOver)
+                CloseHitBox.Visibility = Visibility.Collapsed;
         }
 
-        // X 버튼 영역에서도 계속 보이게 하기
-        private void CloseButton_MouseEnter(object sender, MouseEventArgs e)
+        // X 주변 확장 영역 Hover 시작
+        private void CloseHitBox_MouseEnter(object sender, MouseEventArgs e)
         {
-            CloseButton.Visibility = Visibility.Visible;
+            CloseHitBox.Visibility = Visibility.Visible;
         }
 
-        private void CloseButton_MouseLeave(object sender, MouseEventArgs e)
+        // X 주변 확장 영역 벗어나면 숨김
+        private void CloseHitBox_MouseLeave(object sender, MouseEventArgs e)
         {
-            // X에서 벗어나도 캐릭터 위라면 유지
             if (!CharacterImage.IsMouseOver)
-                CloseButton.Visibility = Visibility.Collapsed;
+                CloseHitBox.Visibility = Visibility.Collapsed;
         }
 
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void InputChatBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Enter로 전송
+            if (e.Key == Key.Enter)
+            {
+                // 엔터 입력 시 현재 Placeholder 제거된 상태라면
+                if (InputChatBox.Text != InputChatBox.Tag.ToString())
+                {
+                    MessageBox.Show("전송: " + InputChatBox.Text); // 임시 디버깅
+                    InputChatBox.Text = ""; // 입력창 비우기
+                }
+
+                e.Handled = true;
+            }
         }
 
     }

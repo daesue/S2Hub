@@ -67,11 +67,19 @@ namespace S2Hub_App.Views
 
         private void OnHelpChatClick(object sender, RoutedEventArgs e)
         {
-            // 여기에 대화 도움말을 표시하는 로직을 구현하세요.
-            var dlg = new ChatDialog
+            // LLM 도움말 대화창 열기
+            var dlg = new ChatDialog();
+            dlg.Owner = this;
+
+            // MainWindow 기준 좌표 계산
+            dlg.Loaded += (s, e) =>
             {
-                Owner = this
+                var main = this; // MainWindow
+
+                dlg.Left = main.Left + main.Width - dlg.Width - 20;
+                dlg.Top = main.Top + main.Height - dlg.Height - 40;
             };
+
             dlg.Show();
         }
     }
